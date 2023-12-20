@@ -1,12 +1,13 @@
 ## 1. Est-ce vraiment un problème? Justifiez votre réponse.
 
-
+La transition en algorithme AES peut être considérer comme une amélioration significatives par rapport à l'algorithme SDES. Cette amélioration est dû à la clé AES qui est de 256 bits contre 10 bits pour la clé SDES. De plus, avec un espace de clé plus grand, l'attaque par force brute devient plus difficile, ainsi AES rend les communications plus sécurisées.
 
 ## 2. Nous allons tenter d’illustrer expérimentalement les différences entre les deux protocoles. Vous évaluerez:
 
 -  ## 1. Le temps d’exécution du chiffrement/déchiffrement d’un message avec chacun des deux protocoles. Ici
 -  ## vous devez le mesurer expérimentalement et donc fournir le code Python associé.
 
+Voir fichier partie2.py pour le code python et exécuter le fichier pour avoir le temps d'exécution du chiffrement/déchiffrement des deux protocoles. 
 
 
 -  ## 2. Le temps de cassage d’AES (même pour un cassage astucieux) si vous deviez l’exécuter sur votre ordinateur.
