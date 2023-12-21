@@ -3,6 +3,14 @@ from scapy.all import IP, UDP, Raw, rdpcap
 import main
 
 def pkcs7_unpad(data):
+    """ fonction qui permet de supprimer le padding
+
+    Args:
+        data (bytes): les données à traiter
+
+    Returns:
+        bytes: les données sans le padding
+    """
     padding_size = data[-1]
 
     if all(i == padding_size for i in data[-padding_size:]):
@@ -11,6 +19,14 @@ def pkcs7_unpad(data):
         return data
 
 def encrypt_messages(trace_path):
+    """ fonction qui permet de crypter les messages
+
+    Args:
+        trace_path (str): le chemin du fichier trace a crypter
+
+    Returns:
+        list: les messages cryptés
+    """
     encrypted_messages = []
     packets = rdpcap(trace_path)
 
@@ -25,6 +41,15 @@ def encrypt_messages(trace_path):
     return encrypted_messages
 
 def decrypt_messages(key, encrypted_messages):
+    """ fonction qui permet de décrypter les messages
+
+    Args:
+        key (int): la clé de décryptage
+        encrypted_messages (str): les messages à décrypter
+
+    Returns:
+        list: les messages décryptés 
+    """
     decrypted_messages = []
 
     for iv, encrypted_message in encrypted_messages:
@@ -37,6 +62,8 @@ def decrypt_messages(key, encrypted_messages):
     return decrypted_messages
 
 if __name__ == "__main__":
+    """ fonction qui permet de tester les fonctions de ce fichier """
+    
     rossignol2 = main.open_image("./docs/rossignol2.bmp")
 
     original_key = ""

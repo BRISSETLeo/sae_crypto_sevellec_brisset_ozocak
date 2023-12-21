@@ -7,6 +7,14 @@ from PIL import Image
 
 
 def open_image(path):
+    """ fonction qui permet d'ouvrir une image
+
+    Args:
+        path (str): le chemin de l'image
+
+    Returns:
+        Image: l'image ouverte 
+    """
     try:
         image = Image.open(path)
         return image
@@ -16,6 +24,14 @@ def open_image(path):
 
 
 def to_binary(image):
+    """ fonction qui permet de convertir une image en binaire
+
+    Args:
+        image (Image): l'image à convertir 
+
+    Returns:
+        Bytes: l'image convertie en binaire 
+    """
     try:
         img = Image.eval(image, lambda x: 255 - x)
         data = list(img.getdata())
@@ -27,16 +43,41 @@ def to_binary(image):
 
 
 def block_of_8(lst):
+    """ fonction qui permet de séparer une liste en bloc de 8
+
+    Args:
+        lst (list): la liste à séparer 
+
+    Returns:
+        list: la liste séparée en bloc de 8 
+    """
     return [lst[i] for i in range(7, len(lst), 8)]
 
 
 def last_bit(image):
+    """ fonction qui permet de récupérer le dernier bit de chaque block de 8
+
+    Args:
+        image (Image): l'image à traiter 
+
+    Returns:
+        bytes: les 512 derniers bits de chaque block de 8 de l'image 
+    """
     data_binary = to_binary(image)
     data_bits = block_of_8(data_binary[:512])  # 8 * 64 = 512
     return data_bits
 
 
 def encrypt_message(key, plain_messages):
+    """ fonction qui permet de crypter un message
+
+    Args:
+        key (int):  la clé de cryptage 
+        plain_messages (str): le message à crypter 
+
+    Returns:
+        list: le message crypté 
+    """
     encrypted_messages = []
 
     for plain_message in plain_messages:
@@ -51,6 +92,15 @@ def encrypt_message(key, plain_messages):
 
 
 def decrypt_message(key, encrypted_messages):
+    """ fonction qui permet de décrypter un message
+
+    Args:
+        key (int): la clé de décryptage 
+        encrypted_messages (str): le message à décrypter
+
+    Returns:
+        list: le message décrypté 
+    """
     decrypted_messages = []
 
     for iv, encrypted_message in encrypted_messages:
@@ -64,6 +114,7 @@ def decrypt_message(key, encrypted_messages):
 
 
 if __name__ == "__main__":
+    """ fonction qui permet de tester les fonctions de ce fichier """
 
     rossignol2 = open_image("./docs/rossignol2.bmp")
 
